@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAZ Physio Care & Surgicals | Dr. Umer Farook | Ramanathapuram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4a90d9;
+    --blue-dark: #2a6fad;
+    --blue-light: #e8f3fc;
+    --green: #6abf3e;
+    --green-dark: #4e9a28;
+    --green-light: #eef7e6;
+    --dark: #1a1f2e;
+    --text: #3d4252;
+    --light: #f7fbff;
+    --white: #ffffff;
+    --border: #d0e8f8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; color:var(--text); background:var(--white); }
+
+  /* TOP BAR */
+  .topbar { background:var(--dark); color:#aab0c4; font-size:13px; padding:8px 0; }
+  .topbar .wrap { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; }
+  .topbar a { color:#7ec8f5; text-decoration:none; }
+
+  /* NAV */
+  nav { background:var(--white); border-bottom:3px solid var(--green); position:sticky; top:0; z-index:100; box-shadow:0 2px 20px rgba(74,144,217,0.1); }
+  .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; height:72px; }
+
+  /* LOGO */
+  .logo-wrap { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .logo-icon {
+    width:52px; height:52px; position:relative; flex-shrink:0;
+  }
+  .logo-icon svg { width:100%; height:100%; }
+  .logo-text { line-height:1.2; }
+  .logo-text .maz { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--blue-dark); }
+  .logo-text .maz span { color:var(--green-dark); }
+  .logo-text .sub { font-size:11px; color:#6b7280; font-weight:500; letter-spacing:0.3px; }
+
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { text-decoration:none; color:var(--text); font-size:14px; font-weight:500; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--blue-dark); }
+  .nav-cta { background:var(--blue-dark); color:var(--white); padding:10px 22px; border-radius:6px; font-size:14px; font-weight:600; text-decoration:none; transition:background 0.2s; }
+  .nav-cta:hover { background:var(--blue); }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg, #1a3a5c 0%, #1e4d7b 50%, #163352 100%); min-height:520px; display:flex; align-items:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 70% 50%, rgba(106,191,62,0.08) 0%, transparent 60%); }
+  .hero::after { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; border-radius:50%; border:2px solid rgba(74,144,217,0.12); }
+  .hero .wrap { max-width:1100px; margin:0 auto; padding:60px 24px; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .hero-text h1 { font-family:'Playfair Display',serif; font-size:44px; line-height:1.2; color:var(--white); margin-bottom:8px; }
+  .hero-text h1 .blue { color:#7ec8f5; }
+  .hero-text h1 .green { color:#9fe066; }
+  .dr-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(106,191,62,0.15); border:1px solid rgba(106,191,62,0.3); border-radius:8px; padding:10px 16px; margin-bottom:20px; }
+  .dr-badge .name { color:#9fe066; font-weight:600; font-size:15px; }
+  .dr-badge .qual { color:rgba(255,255,255,0.6); font-size:12px; }
+  .hero-text p { color:rgba(255,255,255,0.75); font-size:15px; line-height:1.7; margin-bottom:28px; }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-blue { background:var(--blue); color:var(--white); padding:13px 26px; border-radius:6px; font-size:15px; font-weight:600; text-decoration:none; transition:background 0.2s; display:inline-block; }
+  .btn-blue:hover { background:#378acc; }
+  .btn-green { background:var(--green); color:var(--white); padding:13px 26px; border-radius:6px; font-size:15px; font-weight:600; text-decoration:none; transition:background 0.2s; display:inline-block; }
+  .btn-green:hover { background:var(--green-dark); }
+  .btn-outline { border:2px solid rgba(255,255,255,0.35); color:var(--white); padding:12px 26px; border-radius:6px; font-size:15px; font-weight:500; text-decoration:none; transition:background 0.2s; display:inline-block; }
+  .btn-outline:hover { background:rgba(255,255,255,0.08); }
+
+  .hero-cards { display:flex; flex-direction:column; gap:14px; }
+  .hero-card { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:18px 22px; }
+  .hero-card h4 { color:#7ec8f5; font-size:11px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:6px; }
+  .hero-card p { color:var(--white); font-size:15px; font-weight:500; }
+  .hero-card small { color:rgba(255,255,255,0.55); font-size:12px; }
+
+  /* INFO STRIP */
+  .info-strip { background:var(--blue-light); border-bottom:2px solid var(--border); }
+  .info-strip .wrap { max-width:1100px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(3,1fr); }
+  .info-item { padding:26px 20px; border-right:1px solid var(--border); display:flex; align-items:center; gap:14px; }
+  .info-item:last-child { border-right:none; }
+  .info-icon { width:46px; height:46px; border-radius:50%; background:var(--blue-dark); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .info-item h4 { font-size:11px; color:var(--blue-dark); font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px; }
+  .info-item p { font-size:13px; color:var(--text); font-weight:500; }
+
+  /* COMMON */
+  section { padding:76px 0; }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .section-label { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--green-dark); margin-bottom:8px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:34px; color:var(--dark); margin-bottom:14px; line-height:1.25; }
+  .section-desc { font-size:15px; color:#6b7280; line-height:1.7; max-width:560px; }
+
+  /* ABOUT */
+  .about { background:var(--white); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .about-visual { position:relative; }
+  .doctor-card { background:linear-gradient(135deg, var(--blue-light), var(--green-light)); border-radius:20px; padding:40px 32px; text-align:center; border:2px solid var(--border); }
+  .doctor-avatar { width:110px; height:110px; border-radius:50%; background:linear-gradient(135deg, var(--blue-dark), var(--blue)); margin:0 auto 18px; display:flex; align-items:center; justify-content:center; border:4px solid var(--white); box-shadow:0 4px 20px rgba(74,144,217,0.25); }
+  .doctor-avatar svg { opacity:0.9; }
+  .doctor-card h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--dark); margin-bottom:6px; }
+  .doctor-card .qual { font-size:13px; color:var(--blue-dark); font-weight:600; letter-spacing:0.5px; margin-bottom:4px; }
+  .doctor-card .clinic-name { font-size:13px; color:#6b7280; margin-bottom:18px; }
+  .qual-badges { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .qual-badge { background:var(--blue-dark); color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+  .qual-badge.green { background:var(--green-dark); }
+  .stat-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px; }
+  .stat-box { background:var(--white); border-radius:12px; padding:16px; text-align:center; border:1px solid var(--border); }
+  .stat-box strong { display:block; font-family:'Playfair Display',serif; font-size:26px; color:var(--blue-dark); }
+  .stat-box span { font-size:12px; color:#6b7280; }
+  .about-text { padding-right:10px; }
+  .about-text p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px; }
+  .about-list { list-style:none; margin-bottom:28px; }
+  .about-list li { padding:9px 0; border-bottom:1px solid var(--border); font-size:14px; display:flex; align-items:center; gap:10px; color:var(--text); }
+  .about-list li::before { content:'✓'; color:var(--green-dark); font-weight:700; font-size:15px; }
+
+  /* SERVICES */
+  .services { background:var(--light); }
+  .services-header { text-align:center; margin-bottom:44px; }
+  .services-header .section-desc { margin:0 auto; }
+  .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .service-card { background:var(--white); border-radius:14px; padding:26px 18px; text-align:center; border:1.5px solid var(--border); transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s; cursor:pointer; }
+  .service-card:hover { transform:translateY(-6px); box-shadow:0 12px 36px rgba(74,144,217,0.13); border-color:var(--blue); }
+  .service-icon { width:58px; height:58px; margin:0 auto 14px; border-radius:50%; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:24px; }
+  .service-card:hover .service-icon { background:var(--green-light); }
+  .service-card h3 { font-size:14px; font-weight:600; color:var(--dark); margin-bottom:7px; }
+  .service-card p { font-size:12px; color:#6b7280; line-height:1.6; }
+
+  /* APPOINTMENT */
+  .appointment { background:linear-gradient(135deg, #1a3a5c, #1e4d7b); }
+  .appt-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .appt-text h2 { font-family:'Playfair Display',serif; font-size:34px; color:var(--white); margin-bottom:14px; }
+  .appt-text p { color:rgba(255,255,255,0.75); font-size:15px; line-height:1.7; margin-bottom:22px; }
+  .appt-info { display:flex; flex-direction:column; gap:12px; }
+  .appt-info-item { display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.08); border-radius:10px; padding:14px 18px; border:1px solid rgba(255,255,255,0.12); }
+  .appt-info-item span { color:var(--white); font-size:14px; }
+  .appt-info-item strong { color:#9fe066; }
+  .appt-form { background:var(--white); border-radius:18px; padding:36px; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+  .appt-form h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--dark); margin-bottom:22px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+  .form-group { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
+  .form-group label { font-size:12px; font-weight:600; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; }
+  .form-group input,.form-group select,.form-group textarea { padding:11px 13px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text); background:var(--light); transition:border-color 0.2s; outline:none; }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--blue); }
+  .form-group textarea { resize:vertical; min-height:75px; }
+  .btn-submit { width:100%; background:var(--blue-dark); color:white; padding:14px; border:none; border-radius:8px; font-size:15px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; }
+  .btn-submit:hover { background:var(--blue); }
+
+  /* HOURS */
+  .hours-section { background:var(--white); }
+  .hours-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .hours-card { border:2px solid var(--border); border-radius:14px; padding:28px 22px; text-align:center; transition:border-color 0.2s; }
+  .hours-card:hover { border-color:var(--blue); }
+  .hours-card .icon { font-size:30px; margin-bottom:12px; }
+  .hours-card h4 { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--blue-dark); margin-bottom:10px; }
+  .hours-card p { font-size:14px; color:var(--dark); font-weight:500; line-height:1.9; }
+
+  /* CONTACT */
+  .contact-section { background:var(--light); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  .contact-info h2 { font-family:'Playfair Display',serif; font-size:30px; color:var(--dark); margin-bottom:22px; }
+  .contact-item { display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid var(--border); }
+  .contact-item:last-child { border-bottom:none; }
+  .c-icon { width:42px; height:42px; border-radius:10px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; border:1px solid var(--border); }
+  .contact-item h5 { font-size:11px; font-weight:700; color:var(--blue-dark); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px; }
+  .contact-item p { font-size:14px; color:var(--text); line-height:1.6; }
+  .contact-item a { color:var(--blue-dark); text-decoration:none; }
+  .map-box { border-radius:16px; overflow:hidden; border:2px solid var(--border); background:var(--blue-light); height:340px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; }
+  .map-box svg { opacity:0.25; }
+  .map-box p { font-size:14px; color:var(--blue-dark); opacity:0.7; text-align:center; line-height:1.5; }
+  .map-btn { background:var(--blue-dark); color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:13px; font-weight:600; }
+
+  /* FOOTER */
+  footer { background:var(--dark); color:#aab0c4; padding:48px 0 20px; }
+  .footer-grid { max-width:1100px; margin:0 auto; padding:0 24px 40px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; }
+  .footer-logo .maz { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--white); }
+  .footer-logo .maz span { color:#9fe066; }
+  .footer-logo p { font-size:13px; line-height:1.7; margin-top:10px; }
+  footer h5 { color:var(--white); font-size:13px; font-weight:700; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.8px; }
+  footer ul { list-style:none; }
+  footer ul li { margin-bottom:8px; }
+  footer ul li a { color:#aab0c4; text-decoration:none; font-size:13px; transition:color 0.2s; }
+  footer ul li a:hover { color:#7ec8f5; }
+  .footer-bottom { max-width:1100px; margin:0 auto; padding:18px 24px 0; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:12px; flex-wrap:wrap; gap:8px; }
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .hero .wrap,.about-grid,.appt-grid,.contact-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .hours-grid{grid-template-columns:1fr;}
+    .info-strip .wrap{grid-template-columns:1fr;}
+    .info-item{border-right:none;border-bottom:1px solid var(--border);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .hero-text h1{font-size:30px;}
+    .nav-links{display:none;}
+    .form-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div>
+      📞 <a href="tel:+917448858968">7448858968</a> &nbsp;/&nbsp; <a href="tel:+919150758968">9150758968</a>
+      &nbsp;&nbsp; ✉ <a href="mailto:physioumer@gmail.com">physioumer@gmail.com</a>
+    </div>
+    <div>Mon–Sun: 9AM–1PM &nbsp;|&nbsp; 2PM–8PM &nbsp;|&nbsp; Home Visits Available</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo-wrap">
+      <div class="logo-icon">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="26" cy="26" r="24" stroke="#4a90d9" stroke-width="2.5" fill="none"/>
+          <path d="M4 32 Q14 48 26 48 Q38 48 48 32" stroke="#6abf3e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="26" cy="20" r="5" fill="#4a90d9" opacity="0.8"/>
+          <path d="M20 26 Q18 34 22 36 L26 38 L30 36 Q34 34 32 26" fill="#6abf3e" opacity="0.7"/>
+          <path d="M22 22 L20 30" stroke="#4a90d9" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M30 22 L32 30" stroke="#4a90d9" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="maz">MA<span>Z</span></div>
+        <div class="sub">Physio Care & Surgicals</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#appointment">Appointment</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#appointment" class="nav-cta">Book Appointment</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="dr-badge">
+        <div>
+          <div class="name">Dr. Umer Farook</div>
+          <div class="qual">BPT · DOFSIM · MIAP</div>
+        </div>
+      </div>
+      <h1>Expert <span class="blue">Physio Care</span><br>&amp; <span class="green">Rehabilitation</span></h1>
+      <p>Personalised physiotherapy treatment for pain management, sports injuries, neurological conditions, and post-surgery rehabilitation. Home visits available.</p>
+      <div class="hero-btns">
+        <a href="#appointment" class="btn-blue">Book Appointment</a>
+        <a href="#services" class="btn-outline">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-card">
+        <h4>Emergency / Enquiry</h4>
+        <p>7448858968 &nbsp;/&nbsp; 9150758968</p>
+        <small>Call anytime — we're here to help</small>
+      </div>
+      <div class="hero-card">
+        <h4>Working Hours</h4>
+        <p>9:00 AM – 1:00 PM &nbsp;&amp;&nbsp; 2:00 PM – 8:00 PM</p>
+        <small>Open every day including Sundays</small>
+      </div>
+      <div class="hero-card">
+        <h4>Home Visit Available</h4>
+        <p>Physiotherapy at your doorstep</p>
+        <small>Ramanathapuram &amp; nearby areas</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="wrap">
+    <div class="info-item">
+      <div class="info-icon">📅</div>
+      <div>
+        <h4>Online Appointment</h4>
+        <p>Book your slot — anytime, 24×7</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">⏰</div>
+      <div>
+        <h4>Timing Schedule</h4>
+        <p>9AM–1PM &amp; 2PM–8PM · All Days</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">🚨</div>
+      <div>
+        <h4>Emergency Cases</h4>
+        <p>7448858968 &nbsp;/&nbsp; 9150758968</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="doctor-card">
+          <div class="doctor-avatar">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="22" r="12" fill="rgba(255,255,255,0.9)"/>
+              <path d="M10 52c0-11.046 8.954-20 20-20s20 8.954 20 20" fill="rgba(255,255,255,0.7)"/>
+            </svg>
+          </div>
+          <h3>Dr. Umer Farook</h3>
+          <div class="qual">Physiotherapist &amp; Rehabilitation Specialist</div>
+          <div class="clinic-name">MAZ Physio Care &amp; Surgicals</div>
+          <div class="qual-badges">
+            <span class="qual-badge">BPT</span>
+            <span class="qual-badge green">DOFSIM</span>
+            <span class="qual-badge">MIAP</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <strong>500+</strong>
+              <span>Patients Treated</span>
+            </div>
+            <div class="stat-box">
+              <strong>5+</strong>
+              <span>Years Experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">About Us</p>
+        <h2 class="section-title">MAZ Physio Care &amp; Surgicals</h2>
+        <p>At MAZ Physio Care &amp; Surgicals, we provide expert physiotherapy and surgical supply services under the guidance of Dr. Umer Farook (BPT, DOFSIM, MIAP). We offer highly personalised, evidence-based treatment for a wide range of conditions.</p>
+        <p>Our clinic is equipped with modern physiotherapy equipment and follows a multidisciplinary approach to ensure the fastest and safest recovery for every patient. Home visit services are also available across Ramanathapuram.</p>
+        <ul class="about-list">
+          <li>Qualified BPT physiotherapist — Dr. Umer Farook</li>
+          <li>Member of Indian Association of Physiotherapists (MIAP)</li>
+          <li>Diploma in Orthopaedic &amp; Sports (DOFSIM)</li>
+          <li>Home visit physiotherapy available</li>
+          <li>Surgical &amp; rehabilitation equipment supply</li>
+          <li>Paediatric, neurological &amp; orthopaedic care</li>
+        </ul>
+        <a href="#appointment" class="btn-blue">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-header">
+      <p class="section-label">What We Treat</p>
+      <h2 class="section-title">All Pain Management Services</h2>
+      <p class="section-desc">Our physiotherapists provide individualised treatment plans for all athletic and non-sporting conditions using the latest techniques.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💪</div>
+        <h3>Shoulder Pain</h3>
+        <p>Rotator cuff injuries, frozen shoulder, and all shoulder conditions treated.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🦴</div>
+        <h3>Back Pain</h3>
+        <p>Disc problems, spinal muscle and nerve pain with expert physio care.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>Neck Pain</h3>
+        <p>Cervical spondylosis, stiffness, and all neck-related conditions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🦵</div>
+        <h3>Knee Pain</h3>
+        <p>Ligament injuries, arthritis, and post-surgical knee rehabilitation.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🦶</div>
+        <h3>Ankle &amp; Foot Pain</h3>
+        <p>Ligament tears, plantar fasciitis, and fracture rehabilitation.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✋</div>
+        <h3>Elbow &amp; Wrist Pain</h3>
+        <p>Tennis elbow, carpal tunnel, and wrist joint conditions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏃</div>
+        <h3>Sports Injury</h3>
+        <p>Complete sports injury management and performance rehabilitation.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧬</div>
+        <h3>Neurological Rehab</h3>
+        <p>Stroke, cerebral palsy, Parkinson's, and neurological recovery.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👶</div>
+        <h3>Paediatric Physio</h3>
+        <p>Specialised care for children with developmental and movement conditions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">❤️</div>
+        <h3>Cardiac Physio</h3>
+        <p>Post-cardiac surgery recovery and cardiac rehabilitation programs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Home Visit</h3>
+        <p>Professional physiotherapy sessions at your home across Ramanathapuram.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🩺</div>
+        <h3>Surgical Supplies</h3>
+        <p>Orthopaedic braces, supports, TENS units and rehabilitation equipment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="appointment" id="appointment">
+  <div class="wrap">
+    <div class="appt-grid">
+      <div class="appt-text">
+        <p class="section-label" style="color:#9fe066;">Get in Touch</p>
+        <h2>Book Your Appointment Today</h2>
+        <p>Whether you need a clinic visit or a home session, Dr. Umer Farook and the MAZ team are ready to help you recover and move pain-free.</p>
+        <div class="appt-info">
+          <div class="appt-info-item">📞 <span><strong>7448858968</strong> &nbsp;/&nbsp; <strong>9150758968</strong></span></div>
+          <div class="appt-info-item">✉ <span>physioumer@gmail.com</span></div>
+          <div class="appt-info-item">📍 <span>No.6, Lodge Building, Ramanathapuram – 623504</span></div>
+          <div class="appt-info-item">🏠 <span><strong>Home Visit Available</strong> — Call to Schedule</span></div>
+        </div>
+      </div>
+      <div class="appt-form">
+        <h3>Request an Appointment</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select>
+              <option>Select service</option>
+              <option>Back Pain</option>
+              <option>Knee Pain</option>
+              <option>Shoulder Pain</option>
+              <option>Neck Pain</option>
+              <option>Sports Injury</option>
+              <option>Neurological Rehab</option>
+              <option>Paediatric Physiotherapy</option>
+              <option>Cardiac Physiotherapy</option>
+              <option>Stroke Rehabilitation</option>
+              <option>Home Visit</option>
+              <option>Surgical Supplies</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Describe Your Problem</label>
+          <textarea placeholder="Brief description of your condition or pain..."></textarea>
+        </div>
+        <button class="btn-submit" id="submitBtn">Confirm Appointment →</button>
+        <div id="formMsg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:500;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:44px;">
+      <p class="section-label">Availability</p>
+      <h2 class="section-title">Clinic Information</h2>
+    </div>
+    <div class="hours-grid">
+      <div class="hours-card">
+        <div class="icon">⏰</div>
+        <h4>Working Hours</h4>
+        <p>Morning: 9:00 AM – 1:00 PM<br>Evening: 2:00 PM – 8:00 PM<br><strong>Open Every Day incl. Sunday</strong></p>
+      </div>
+      <div class="hours-card">
+        <div class="icon">📞</div>
+        <h4>Contact Numbers</h4>
+        <p><a href="tel:+917448858968" style="color:var(--blue-dark);text-decoration:none;">7448858968</a><br><a href="tel:+919150758968" style="color:var(--blue-dark);text-decoration:none;">9150758968</a><br><strong>Available Daily</strong></p>
+      </div>
+      <div class="hours-card">
+        <div class="icon">🏠</div>
+        <h4>Home Visit</h4>
+        <p>In-home physiotherapy sessions<br>available across<br><strong>Ramanathapuram &amp; nearby</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Find Us</p>
+        <h2>Contact &amp; Location</h2>
+        <div class="contact-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <h5>Address</h5>
+            <p>No. 6, Lodge Building,<br>Ramanathapuram – 623504,<br>Tamil Nadu, India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">📞</div>
+          <div>
+            <h5>Phone</h5>
+            <p><a href="tel:+917448858968">7448858968</a><br><a href="tel:+919150758968">9150758968</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">✉</div>
+          <div>
+            <h5>Email</h5>
+            <p><a href="mailto:physioumer@gmail.com">physioumer@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">👨‍⚕️</div>
+          <div>
+            <h5>Doctor</h5>
+            <p>Dr. Umer Farook<br>BPT, DOFSIM, MIAP</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-box">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          <path d="M30 5C21.163 5 14 12.163 14 21c0 13.5 16 34 16 34s16-20.5 16-34C46 12.163 38.837 5 30 5zm0 22a7 7 0 110-14 7 7 0 010 14z" stroke="#2a6fad" stroke-width="2.5"/>
+        </svg>
+        <p>No. 6, Lodge Building<br>Ramanathapuram – 623504</p>
+        <a href="https://maps.google.com/?q=Ramanathapuram+Tamil+Nadu" target="_blank" class="map-btn">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="maz">MA<span>Z</span></span></div>
+      <p>MAZ Physio Care &amp; Surgicals — Expert physiotherapy and rehabilitation under Dr. Umer Farook (BPT, DOFSIM, MIAP), Ramanathapuram.</p>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#appointment">Appointment</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">Back &amp; Neck Pain</a></li>
+        <li><a href="#">Knee &amp; Shoulder</a></li>
+        <li><a href="#">Sports Injury</a></li>
+        <li><a href="#">Neurological Rehab</a></li>
+        <li><a href="#">Home Visit</a></li>
+        <li><a href="#">Surgical Supplies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+917448858968">7448858968</a></li>
+        <li><a href="tel:+919150758968">9150758968</a></li>
+        <li><a href="mailto:physioumer@gmail.com">physioumer@gmail.com</a></li>
+        <li><a href="#">Ramanathapuram – 623504</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MAZ Physio Care &amp; Surgicals. All rights reserved.</span>
+    <span>Dr. Umer Farook — BPT, DOFSIM, MIAP</span>
+  </div>
+</footer>
+
+<script>
+// ============================================
+// MAZ Physio — Frontend to Backend Connection
+// Change this URL after deploying your backend
+// ============================================
+const API_URL = 'http://localhost:5000/api';
+
+const form = document.querySelector('.appt-form');
+const submitBtn = document.getElementById('submitBtn');
+const formMsg = document.getElementById('formMsg');
+
+function showMessage(text, isSuccess) {
+  formMsg.style.display = 'block';
+  formMsg.textContent = text;
+  formMsg.style.background = isSuccess ? '#eef7e6' : '#fef2f2';
+  formMsg.style.color = isSuccess ? '#166534' : '#b91c1c';
+  formMsg.style.border = `1px solid ${isSuccess ? '#bbf7d0' : '#fecaca'}`;
+  if (isSuccess) formMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+if (form) {
+ submitBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const name  = form.querySelector('input[placeholder="Full name"]').value.trim();
+    const phone = form.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
+    const date  = form.querySelector('input[type="date"]').value;
+    const service = form.querySelector('select').value;
+    const problem = form.querySelector('textarea').value.trim();
+
+    if (!name || !phone || !date || !service || service === 'Select service') {
+      showMessage('Please fill all required fields before submitting.', false);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(`${API_URL}/appointments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientName: name,
+          phone: phone.replace(/\s/g, '').replace('+91', '').trim(),
+          preferredDate: date,
+          service,
+          problemDescription: problem,
+          visitType: 'clinic',
+        }),
+      });
+
+      const data = await response.json();
+      showMessage(data.message, data.success);
+
+      if (data.success) {
+        form.reset();
+        submitBtn.textContent = '✓ Appointment Requested!';
+        submitBtn.style.background = '#166534';
+      } else {
+        submitBtn.textContent = 'Confirm Appointment →';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      showMessage('Could not connect to server. Please call 7448858968 directly.', false);
+      submitBtn.textContent = 'Confirm Appointment →';
+      submitBtn.disabled = false;
+    }
+  });
+}
+</script>
+</body>
+</html>
