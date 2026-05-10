@@ -612,9 +612,9 @@
 // MAZ Physio — Frontend to Backend Connection
 // Change this URL after deploying your backend
 // ============================================
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://maz-physio-backend.onrender.com/api';
 
-const form = document.querySelector('.appt-form');
+const formDiv = document.querySelector('.appt-form');
 const submitBtn = document.getElementById('submitBtn');
 const formMsg = document.getElementById('formMsg');
 
@@ -627,15 +627,15 @@ function showMessage(text, isSuccess) {
   if (isSuccess) formMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-if (form) {
- submitBtn.addEventListener('click', async (e) => {
+if (submitBtn) {
+  submitBtn.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    const name  = form.querySelector('input[placeholder="Full name"]').value.trim();
-    const phone = form.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
-    const date  = form.querySelector('input[type="date"]').value;
-    const service = form.querySelector('select').value;
-    const problem = form.querySelector('textarea').value.trim();
+    const name  = formDiv.querySelector('input[placeholder="Full name"]').value.trim();
+    const phone = formDiv.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
+    const date  = formDiv.querySelector('input[type="date"]').value;
+    const service = formDiv.querySelector('select').value;
+    const problem = formDiv.querySelector('textarea').value.trim();
 
     if (!name || !phone || !date || !service || service === 'Select service') {
       showMessage('Please fill all required fields before submitting.', false);
@@ -663,7 +663,7 @@ if (form) {
       showMessage(data.message, data.success);
 
       if (data.success) {
-        form.reset();
+        formDiv.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
         submitBtn.textContent = '✓ Appointment Requested!';
         submitBtn.style.background = '#166534';
       } else {

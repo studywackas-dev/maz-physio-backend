@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAZ Physio — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --card: #111827;
+    --border: #1e2d45;
+    --blue: #2a6fad;
+    --green: #22c55e;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --accent: #38bdf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* LOGIN PAGE */
+  #loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 30% 50%, #0d1f3c 0%, #0a0f1e 70%);
+  }
+
+  .login-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  }
+
+  .login-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+
+  .login-logo span { color: var(--blue); }
+
+  .login-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    background: #0d1625;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--accent); }
+
+  .btn-login {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 4px;
+  }
+
+  .btn-login:hover { background: #1e5a94; transform: translateY(-1px); }
+
+  .login-error {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  /* DASHBOARD */
+  #dashboard { display: none; }
+
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .header-logo span { color: var(--blue); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .badge-live {
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: var(--green);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-live::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .btn-logout {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-logout:hover { border-color: var(--red); color: var(--red); }
+
+  main { padding: 32px; max-width: 1200px; margin: 0 auto; }
+
+  .page-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .page-sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .stat-card.total::before { background: var(--accent); }
+  .stat-card.pending::before { background: var(--yellow); }
+  .stat-card.confirmed::before { background: var(--green); }
+  .stat-card.completed::before { background: var(--blue); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .stat-card.total .stat-num { color: var(--accent); }
+  .stat-card.pending .stat-num { color: var(--yellow); }
+  .stat-card.confirmed .stat-num { color: var(--green); }
+  .stat-card.completed .stat-num { color: var(--blue); }
+
+  /* TABLE */
+  .table-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .table-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .table-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .btn-refresh {
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.2);
+    color: var(--accent);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-refresh:hover { background: rgba(56,189,248,0.2); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    background: #0d1625;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .status-pending { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.2); }
+  .status-confirmed { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+  .status-completed { background: rgba(42,111,173,0.1); color: var(--accent); border: 1px solid rgba(42,111,173,0.2); }
+  .status-cancelled { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+
+  .patient-name { font-weight: 500; color: var(--text); }
+  .phone-num { color: var(--muted); font-size: 13px; }
+
+  .loading {
+    text-align: center;
+    padding: 48px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 48px;
+    color: var(--muted);
+  }
+
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-box">
+    <div class="login-logo">MA<span>Z</span></div>
+    <div class="login-sub">Physio Care & Surgicals — Admin Panel</div>
+    <label class="form-label">Username</label>
+    <input class="form-input" type="text" id="username" placeholder="admin" />
+    <label class="form-label">Password</label>
+    <input class="form-input" type="password" id="password" placeholder="••••••••" />
+    <button class="btn-login" onclick="login()">Sign In →</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div class="header-logo">MA<span>Z</span> Admin</div>
+    <div class="header-right">
+      <div class="badge-live">Live</div>
+      <button class="btn-logout" onclick="logout()">Sign Out</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-title">Appointments</div>
+    <div class="page-sub">All patient bookings — MAZ Physio Care & Surgicals</div>
+
+    <div class="stats-grid">
+      <div class="stat-card total">
+        <div class="stat-label">Total</div>
+        <div class="stat-num" id="statTotal">—</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="stat-label">Pending</div>
+        <div class="stat-num" id="statPending">—</div>
+      </div>
+      <div class="stat-card confirmed">
+        <div class="stat-label">Confirmed</div>
+        <div class="stat-num" id="statConfirmed">—</div>
+      </div>
+      <div class="stat-card completed">
+        <div class="stat-label">Completed</div>
+        <div class="stat-num" id="statCompleted">—</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <div class="table-title">All Appointments</div>
+        <button class="btn-refresh" onclick="loadAppointments()">↻ Refresh</button>
+      </div>
+      <div id="tableBody">
+        <div class="loading">Loading appointments...</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const API = 'https://maz-physio-backend.onrender.com/api';
+let token = localStorage.getItem('maz_token');
+
+if (token) showDashboard();
+
+async function login() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const errEl = document.getElementById('loginError');
+
+  try {
+    const res = await fetch(`${API}/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      token = data.token;
+      localStorage.setItem('maz_token', token);
+      showDashboard();
+    } else {
+      errEl.style.display = 'block';
+      errEl.textContent = data.message || 'Invalid credentials';
+    }
+  } catch {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Cannot connect to server!';
+  }
+}
+
+function showDashboard() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadAppointments();
+}
+
+function logout() {
+  localStorage.removeItem('maz_token');
+  token = null;
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+async function loadAppointments() {
+  document.getElementById('tableBody').innerHTML = '<div class="loading">Loading...</div>';
+
+  try {
+    const res = await fetch(`${API}/appointments`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+
+    if (!data.success) { logout(); return; }
+
+    const c = data.counts;
+    document.getElementById('statTotal').textContent = c.total || 0;
+    document.getElementById('statPending').textContent = c.pending || 0;
+    document.getElementById('statConfirmed').textContent = c.confirmed || 0;
+    document.getElementById('statCompleted').textContent = c.completed || 0;
+
+    const appts = data.appointments;
+
+    if (!appts.length) {
+      document.getElementById('tableBody').innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">📋</div>
+          <div>No appointments yet</div>
+        </div>`;
+      return;
+    }
+
+    const rows = appts.map(a => {
+      const date = new Date(a.preferredDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      const created = new Date(a.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+      return `
+        <tr>
+          <td>
+            <div class="patient-name">${a.patientName}</div>
+            <div class="phone-num">${a.phone}</div>
+          </td>
+          <td>${a.service}</td>
+          <td>${date}</td>
+          <td>${a.problemDescription || '—'}</td>
+          <td><span class="status-badge status-${a.status}">${a.status}</span></td>
+          <td style="color:var(--muted);font-size:13px">${created}</td>
+        </tr>`;
+    }).join('');
+
+    document.getElementById('tableBody').innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Problem</th>
+            <th>Status</th>
+            <th>Booked</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+
+  } catch {
+    document.getElementById('tableBody').innerHTML = '<div class="loading">Error loading data. Check server.</div>';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('loginPage').style.display !== 'none') login();
+});
+</script>
+</body>
+</html>
